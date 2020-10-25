@@ -1,0 +1,3 @@
+/home/xdien/workspace/Barcode-Reader/MyApplication2/app/arm64-v8agenerated/ninja/project/debug/arm64-v8a-DANDROID_ABI=arm64-v8a/CMakeFiles/rebuild_cache.dir
+/home/xdien/workspace/Barcode-Reader/MyApplication2/app/arm64-v8agenerated/ninja/project/debug/arm64-v8a-DANDROID_ABI=arm64-v8a/CMakeFiles/edit_cache.dir
+/home/xdien/workspace/Barcode-Reader/MyApplication2/app/arm64-v8agenerated/ninja/project/debug/arm64-v8a-DANDROID_ABI=arm64-v8a/CMakeFiles/native-lib.dir

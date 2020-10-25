@@ -11,8 +11,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        String asa = stringFromJNI("asdsadasdsds");
-        Log.d("C++", asa);
+        String containEncryptKeyPem = stringFromJNI("noi dung key pem");
+        Log.d("C++", "containEncryptKeyPem: " + containEncryptKeyPem);
     }
     public native static String stringFromJNI(String input);
     static {

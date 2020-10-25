@@ -95,17 +95,17 @@ extern "C"
 JNIEXPORT jstring JNICALL
 Java_com_example_myapplication_MainActivity_stringFromJNI(JNIEnv *env, jclass clazz,
                                                           jstring input) {
-//    const char *plaintext = env->GetStringUTFChars(input,0);
-//    unsigned char ciphertext[1024];
-//    const char *key = "11111111111111111111111111111111";
-//    const char *iv = "2222222222222222";
-//
-//    int ciphertext_len = encrypt(plaintext, strlen(plaintext), key, iv, ciphertext);
-//    __android_log_print(ANDROID_LOG_INFO, "kimisaki", "ndk: %s", base64(ciphertext, ciphertext_len));
-//    env->ReleaseStringUTFChars(env, uuid, plaintext);
-////    std::printf("c+++++++++++++++++++++++++++++++++++++++++++++++++==");
-    return env->NewStringUTF("tra ve tu c+ssssssssssssssssssssssssssssssssss+");
-//    return env->NewStringUTF(base64(ciphertext, ciphertext_len));
+    const char *plaintext = env->GetStringUTFChars(input,0);
+    unsigned char ciphertext[1024];
+    unsigned char myKeyString [] = "This is my string";
+    unsigned char *key = &myKeyString[0];
+    unsigned char myIvString [] = "22222";
+    unsigned char *iv = reinterpret_cast<unsigned char *>( "2222222222222222");
+
+    int ciphertext_len = encrypt(plaintext, strlen(plaintext), key, iv, ciphertext);
+    __android_log_print(ANDROID_LOG_INFO, "kimisaki", "ndk: %s", base64(ciphertext, ciphertext_len));
+    (*env)->ReleaseStringUTFChars(env, uuid, plaintext);
+    return (*env)->NewStringUTF(env, base64(ciphertext, ciphertext_len));
 
 
 }

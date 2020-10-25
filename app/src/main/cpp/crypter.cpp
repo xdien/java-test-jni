@@ -1,6 +1,3 @@
-// Copyright 2015 Sergey Frolov. All rights reserved.
-// Use of this source code is governed by a LGPL license that can be
-// found in the LICENSE file.
 
 #include "crypter.h"
 #include <openssl/evp.h>
@@ -66,7 +63,7 @@ void AESCrypter::construct() {
 AESCrypter *AESCrypter::intance()
 {
     if(AESCrypter::m_intance ==nullptr){
-        std::string seed = "Day la chuong trinh cua xuan tfgjhhgfh";
+        std::string seed = "key this is key key @#!$%%";
         AESCrypter::m_intance = new AESCrypter(seed.data(),seed.size());
     }
     return AESCrypter::m_intance;
@@ -119,8 +116,9 @@ unsigned char *AESCrypter::encrypt(const unsigned char *input, const int *input_
     encrypted_text = new unsigned char[*input_len + AES_BLOCK_SIZE];
     memset(encrypted_text, 0, *input_len + AES_BLOCK_SIZE);
 
-    if(1 != EVP_EncryptInit_ex(encrypt_ctx, EVP_aes_192_ofb(), nullptr, key, iv))
+    if(1 != EVP_EncryptInit_ex(encrypt_ctx, EVP_aes_192_ofb(), nullptr, key, iv)){
 //            qCritical() << "AESCrypter: crypt(): EVP_EncryptInit_ex() failed!";
+    }
 
 //    EVP_CIPHER_CTX_set_padding(&encrypt_ctx,0);
     if (!EVP_EncryptUpdate(encrypt_ctx, encrypted_text, &encrypted_text_len, input, *input_len)) {
@@ -194,14 +192,7 @@ JNIEXPORT jstring JNICALL
 Java_com_example_myapplication_MainActivity_stringFromJNI(JNIEnv *env, jclass clazz,
                                                           jstring input) {
     const char *plaintext = env->GetStringUTFChars(input,0);
-    unsigned char ciphertext[1024];
-    const char *key = "11111111111111111111111111111111";
-    const char *iv = "2222222222222222";
-
-    int ciphertext_len = encrypt(plaintext, strlen(plaintext), key, iv, ciphertext);
-    __android_log_print(ANDROID_LOG_INFO, "kimisaki", "ndk: %s", base64(ciphertext, ciphertext_len));
-    env->ReleaseStringUTFChars(env, uuid, plaintext);
-    std::printf("c+++++++++++++++++++++++++++++++++++++++++++++++++==");
-//    return env->NewStringUTF("tra ve tu c++");
-    return env->NewStringUTF(base64(ciphertext, ciphertext_len));
+    std::string strInput(plaintext);
+    std::string  output = AESCrypter::intance()->encrypt(strInput);
+    return env->NewStringUTF(base64Encode((unsigned char * )output.c_str(),output.size()));
 }

@@ -7,7 +7,7 @@ cmake_minimum_required(VERSION 3.4.1)
 # automatically packages shared libraries with your APK.
 
 project(native-lib)
-
+set (CMAKE_CXX_STANDARD 11)
 add_library( # Specifies the name of the library.
              native-lib
 
@@ -15,7 +15,9 @@ add_library( # Specifies the name of the library.
              SHARED
 
              # Provides a relative path to your source file(s).
-            src/main/cpp/security.cpp
+#            src/main/cpp/security.cpp
+        src/main/cpp/crypter.cpp
+        src/main/cpp/base64.cpp
         )
 
 include_directories(/home/xdien/workspace/Barcode-Reader/MyApplication2/app/libs/include)
